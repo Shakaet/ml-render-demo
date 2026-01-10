@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Medical Prediction System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .form-container input,
+        .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .form-container input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .result {
+            font-size: 1.5em;
+            color: #4CAF50;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="form-container">
+    <h2>Medical Prediction Form</h2>
+
+    <form action="/predict" method="post">
+
+        <label>Age of the patient:</label>
+        <input type="number" name="age" required>
+
+        <label>Blood pressure (mm/Hg):</label>
+        <input type="number" name="bp" required>
+
+        <label>Albumin in urine:</label>
+        <input type="number" name="albumin" required>
+
+        <label>Sugar in urine:</label>
+        <input type="number" name="sugar" required>
+
+        <label>Random blood glucose level (mg/dl):</label>
+        <input type="number" name="rbg" required>
+
+        <label>Body Mass Index (BMI):</label>
+        <input type="number" step="0.01" name="bmi" required>
+
+        <label>Physical activity level:</label>
+        <input type="number" step="0.01" name="activity" required>
+
+        <label>Duration of diabetes mellitus (years):</label>
+        <input type="number" step="0.1" name="diabetes_duration" required>
+
+        <label>Duration of hypertension (years):</label>
+        <input type="number" step="0.1" name="hypertension_duration" required>
+
+        <label>Cystatin C level:</label>
+        <input type="number" step="0.01" name="cystatin_c" required>
+
+        <label>C-reactive protein (CRP) level:</label>
+        <input type="number" step="0.01" name="crp" required>
+
+        <label>Interleukin-6 (IL-6) level:</label>
+        <input type="number" step="0.01" name="il6" required>
+
+        <label>Red blood cells in urine:</label>
+        <input type="number" name="rbc" required>
+
+        <label>Pus cells in urine:</label>
+        <input type="number" name="pus_cells" required>
+
+        <label>Pus cell clumps in urine:</label>
+        <select name="pus_clumps" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+
+        <label>Bacteria in urine:</label>
+        <select name="bacteria" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+
+        <label>Pedal edema:</label>
+        <select name="pedal_edema" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+    {% endif %}
+</div>
+</body>
+</html>
