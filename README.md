@@ -115,6 +115,3 @@ If you encounter any other errors:
 
 The model used in this application is a pre-trained classifier that has been saved using joblib. It predicts the likelihood of a patient requiring dialysis based on the input medical parameters.
 
-## License
-
-This project is licensed under the MIT License.
