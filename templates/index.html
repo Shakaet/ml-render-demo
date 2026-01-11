@@ -1,117 +1,382 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medical Prediction System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 50px;
-        }
-        .form-container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-        }
-        .form-container input,
-        .form-container select {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0 20px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .form-container {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            border-radius: 2px;
+        }
+
+        h2 {
+            color: #2d3748;
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            color: #4a5568;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            transition: color 0.3s ease;
+        }
+
+        .form-group:focus-within label {
+            color: #667eea;
+        }
+
+        .form-container input[type="number"],
+        .form-container input[type="text"],
+        .form-container select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1em;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background: #f7fafc;
+            color: #2d3748;
+        }
+
+        .form-container input[type="number"]:focus,
+        .form-container input[type="text"]:focus,
+        .form-container select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-container select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23667eea' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+
         .form-container input[type="submit"] {
-            background-color: #4CAF50;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            margin-top: 10px;
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
+
         .form-container input[type="submit"]:hover {
-            background-color: #45a049;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
         }
+
+        .form-container input[type="submit"]:active {
+            transform: translateY(-1px);
+        }
+
         .result {
-            font-size: 1.5em;
-            color: #4CAF50;
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 15px;
             text-align: center;
-            margin-top: 20px;
+            font-size: 1.4em;
+            font-weight: 600;
+            animation: fadeIn 0.5s ease-in;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .icon {
+            display: inline-block;
+            margin-right: 8px;
+            color: #667eea;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .form-container {
+                padding: 25px 20px;
+                border-radius: 15px;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            .form-container input[type="number"],
+            .form-container input[type="text"],
+            .form-container select {
+                padding: 12px 14px;
+                font-size: 0.95em;
+            }
+
+            .form-container input[type="submit"] {
+                padding: 14px;
+                font-size: 1em;
+            }
+
+            .result {
+                font-size: 1.2em;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .form-container {
+                padding: 20px 15px;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            label {
+                font-size: 0.9em;
+            }
+        }
+
+        /* Loading animation for submit button */
+        .form-container input[type="submit"]:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
         }
     </style>
 </head>
 
 <body>
 <div class="form-container">
-    <h2>Medical Prediction Form</h2>
+    <div class="header">
+        <h2><i class="fas fa-heartbeat icon"></i>Medical Prediction System</h2>
+    </div>
 
     <form action="/predict" method="post">
+        <div class="form-group">
+            <label><i class="fas fa-birthday-cake icon"></i>Age of the patient:</label>
+            <input type="number" name="age" required min="0" max="120">
+        </div>
 
-        <label>Age of the patient:</label>
-        <input type="number" name="age" required>
+        <div class="form-group">
+            <label><i class="fas fa-tint icon"></i>Blood pressure (mm/Hg):</label>
+            <input type="number" name="bp" required min="0">
+        </div>
 
-        <label>Blood pressure (mm/Hg):</label>
-        <input type="number" name="bp" required>
+        <div class="form-group">
+            <label><i class="fas fa-flask icon"></i>Albumin in urine:</label>
+            <input type="number" name="albumin" required min="0">
+        </div>
 
-        <label>Albumin in urine:</label>
-        <input type="number" name="albumin" required>
+        <div class="form-group">
+            <label><i class="fas fa-candy-cane icon"></i>Sugar in urine:</label>
+            <input type="number" name="sugar" required min="0">
+        </div>
 
-        <label>Sugar in urine:</label>
-        <input type="number" name="sugar" required>
+        <div class="form-group">
+            <label><i class="fas fa-vial icon"></i>Random blood glucose level (mg/dl):</label>
+            <input type="number" name="rbg" required min="0">
+        </div>
 
-        <label>Random blood glucose level (mg/dl):</label>
-        <input type="number" name="rbg" required>
+        <div class="form-group">
+            <label><i class="fas fa-weight icon"></i>Body Mass Index (BMI):</label>
+            <input type="number" step="0.01" name="bmi" required min="0">
+        </div>
 
-        <label>Body Mass Index (BMI):</label>
-        <input type="number" step="0.01" name="bmi" required>
+        <div class="form-group">
+            <label><i class="fas fa-running icon"></i>Physical activity level:</label>
+            <input type="number" step="0.01" name="activity" required min="0">
+        </div>
 
-        <label>Physical activity level:</label>
-        <input type="number" step="0.01" name="activity" required>
+        <div class="form-group">
+            <label><i class="fas fa-calendar-alt icon"></i>Duration of diabetes mellitus (years):</label>
+            <input type="number" step="0.1" name="diabetes_duration" required min="0">
+        </div>
 
-        <label>Duration of diabetes mellitus (years):</label>
-        <input type="number" step="0.1" name="diabetes_duration" required>
+        <div class="form-group">
+            <label><i class="fas fa-calendar-check icon"></i>Duration of hypertension (years):</label>
+            <input type="number" step="0.1" name="hypertension_duration" required min="0">
+        </div>
 
-        <label>Duration of hypertension (years):</label>
-        <input type="number" step="0.1" name="hypertension_duration" required>
+        <div class="form-group">
+            <label><i class="fas fa-microscope icon"></i>Cystatin C level:</label>
+            <input type="number" step="0.01" name="cystatin_c" required min="0">
+        </div>
 
-        <label>Cystatin C level:</label>
-        <input type="number" step="0.01" name="cystatin_c" required>
+        <div class="form-group">
+            <label><i class="fas fa-dna icon"></i>C-reactive protein (CRP) level:</label>
+            <input type="number" step="0.01" name="crp" required min="0">
+        </div>
 
-        <label>C-reactive protein (CRP) level:</label>
-        <input type="number" step="0.01" name="crp" required>
+        <div class="form-group">
+            <label><i class="fas fa-atom icon"></i>Interleukin-6 (IL-6) level:</label>
+            <input type="number" step="0.01" name="il6" required min="0">
+        </div>
 
-        <label>Interleukin-6 (IL-6) level:</label>
-        <input type="number" step="0.01" name="il6" required>
+        <div class="form-group">
+            <label><i class="fas fa-circle icon"></i>Red blood cells in urine:</label>
+            <input type="number" name="rbc" required min="0">
+        </div>
 
-        <label>Red blood cells in urine:</label>
-        <input type="number" name="rbc" required>
+        <div class="form-group">
+            <label><i class="fas fa-dot-circle icon"></i>Pus cells in urine:</label>
+            <input type="number" name="pus_cells" required min="0">
+        </div>
 
-        <label>Pus cells in urine:</label>
-        <input type="number" name="pus_cells" required>
+        <div class="form-group">
+            <label><i class="fas fa-layer-group icon"></i>Pus cell clumps in urine:</label>
+            <select name="pus_clumps" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
 
-        <label>Pus cell clumps in urine:</label>
-        <select name="pus_clumps" required>
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-        </select>
+        <div class="form-group">
+            <label><i class="fas fa-bacteria icon"></i>Bacteria in urine:</label>
+            <select name="bacteria" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
 
-        <label>Bacteria in urine:</label>
-        <select name="bacteria" required>
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-        </select>
+        <div class="form-group">
+            <label><i class="fas fa-hand-paper icon"></i>Pedal edema:</label>
+            <select name="pedal_edema" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
 
-        <label>Pedal edema:</label>
-        <select name="pedal_edema" required>
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-        </select>
-
-        <input type="submit" value="Predict">
+        <input type="submit" value="🔮 Predict Result">
     </form>
 
     {% if prediction_text %}
-        <div class="result">{{ prediction_text }}</div>
+        <div class="result">
+            <i class="fas fa-chart-line" style="margin-right: 10px;"></i>{{ prediction_text }}
+        </div>
     {% endif %}
 </div>
 </body>
