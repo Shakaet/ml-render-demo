@@ -6,7 +6,7 @@ A Flask-based web application that predicts whether a patient requires dialysis 
 
 ## Project Overview
 
-This application provides a user-friendly interface for medical professionals to input patient data and receive predictions about dialysis requirements. The system uses a pre-trained machine learning model (central_model.pkl) to analyze 18 different medical features and provide predictions with confidence scores.
+This application provides a user-friendly interface for medical professionals to input patient data and receive predictions about dialysis requirements. The system uses a pre-trained machine learning model (central_model.pkl) to analyze 17 different medical features and provide predictions with confidence scores.
 
 ## Prerequisites
 
